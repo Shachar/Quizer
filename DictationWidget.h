@@ -20,6 +20,7 @@ public slots:
     void newAnswer();
     void idk();
     void wordsLocationDlg();
+    void dontAsk();
 
 private:
     Ui::DictationWidget *ui;

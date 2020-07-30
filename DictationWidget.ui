@@ -72,6 +72,26 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="dontAsk">
+       <property name="text">
+        <string>Don't ask</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="done">
        <property name="text">
         <string>Done</string>
@@ -167,10 +187,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>dontAsk</sender>
+   <signal>clicked()</signal>
+   <receiver>DictationWidget</receiver>
+   <slot>dontAsk()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newAnswer()</slot>
   <slot>idk()</slot>
   <slot>wordsLocationDlg()</slot>
+  <slot>dontAsk()</slot>
  </slots>
 </ui>

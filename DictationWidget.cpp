@@ -69,6 +69,12 @@ void DictationWidget::wordsLocationDlg() {
     }
 }
 
+void DictationWidget::dontAsk() {
+    words.erase( words.begin()+currentQuestion );
+
+    newQuestion();
+}
+
 DictationWidget::WordPair::WordPair( QStringList list ) {
     assert( list.size()==2 );
     word = std::move( list[0] );
