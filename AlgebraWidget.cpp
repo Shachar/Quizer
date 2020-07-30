@@ -1,17 +1,19 @@
-#include "AlgebraWindow.h"
-#include "ui_AlgebraWindow.h"
+#include "AlgebraWidget.h"
+#include "ui_AlgebraWidget.h"
 
 #include <cstdlib>
+#include <iostream>
 
-AlgebraWindow::AlgebraWindow(QSettings &settings, QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::AlgebraWindow),
-    settings(settings)
+AlgebraWidget::AlgebraWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::AlgebraWidget)
 {
+    ui->setupUi(this);
+    setFocusProxy( ui->answer );
+
     settings.beginGroup("Algebra");
     exercises = settings.value("exercises", Additions).toUInt();
-
-    ui->setupUi(this);
+    settings.endGroup();
 
     refreshMenu();
 
@@ -20,18 +22,18 @@ AlgebraWindow::AlgebraWindow(QSettings &settings, QWidget *parent) :
 
 }
 
-AlgebraWindow::~AlgebraWindow()
+AlgebraWidget::~AlgebraWidget()
 {
     delete ui;
 }
 
-void AlgebraWindow::weHaveAnswer()
+void AlgebraWidget::weHaveAnswer()
 {
     if( checkAnswer() )
         newExercise();
 }
 
-void AlgebraWindow::newExercise() {
+void AlgebraWidget::newExercise() {
     a = std::rand() % 11;
     b = std::rand() % 11;
 
@@ -56,7 +58,7 @@ void AlgebraWindow::newExercise() {
     resetAnswerState();
 }
 
-bool AlgebraWindow::checkAnswer() {
+bool AlgebraWidget::checkAnswer() {
     QByteArray ba = ui->answer->text().toLocal8Bit();
     char *endMarker;
     long answer = strtol( ba.data(), &endMarker, 10 );
@@ -73,7 +75,7 @@ bool AlgebraWindow::checkAnswer() {
     return false;
 }
 
-void AlgebraWindow::resetAnswerState() {
+void AlgebraWidget::resetAnswerState() {
     ui->answer->setText("");
 
     QPalette *palette = new QPalette();
@@ -81,7 +83,7 @@ void AlgebraWindow::resetAnswerState() {
     ui->answer->setPalette(*palette);
 }
 
-void AlgebraWindow::settingsChangedAdd( bool newState ) {
+void AlgebraWidget::settingsChangedAdd( bool newState ) {
     if( newState ) {
         exercises |= Additions;
     } else {
@@ -91,7 +93,7 @@ void AlgebraWindow::settingsChangedAdd( bool newState ) {
     refreshMenu();
 }
 
-void AlgebraWindow::settingsChangedSub( bool newState ) {
+void AlgebraWidget::settingsChangedSub( bool newState ) {
     if( newState ) {
         exercises |= Subtractions;
     } else {
@@ -101,14 +103,14 @@ void AlgebraWindow::settingsChangedSub( bool newState ) {
     refreshMenu();
 }
 
-void AlgebraWindow::refreshMenu() {
-    if( exercises==0 )
-        exercises = Additions;
+void AlgebraWidget::refreshMenu() {
+    if( this->exercises==0 )
+        this->exercises = Additions;
 
     ui->settingsAddition->setChecked( exercises&Additions );
-    ui->settingsSubstraction->setChecked( exercises&Subtractions );
+    ui->settingsSubtraction->setChecked( exercises&Subtractions );
 
-    settings.setValue( "exercises", exercises );
+    settings.setValue( "Algebra/exercises", exercises );
 
     numExerciseTypes=0;
     unsigned exercises = this->exercises;
@@ -123,7 +125,7 @@ void AlgebraWindow::refreshMenu() {
     newExercise();
 }
 
-AlgebraWindow::Exercises AlgebraWindow::chooseOp() const {
+AlgebraWidget::Exercises AlgebraWidget::chooseOp() const {
     unsigned opOrdinal = std::rand() % numExerciseTypes;
 
     unsigned mask = 1;

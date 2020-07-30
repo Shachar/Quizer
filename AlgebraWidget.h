@@ -1,20 +1,20 @@
-#ifndef ALGEBRAWINDOW_H
-#define ALGEBRAWINDOW_H
+#ifndef ALGEBRAWIDGET_H
+#define ALGEBRAWIDGET_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QSettings>
 
 namespace Ui {
-class AlgebraWindow;
+class AlgebraWidget;
 }
 
-class AlgebraWindow : public QMainWindow
+class AlgebraWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AlgebraWindow(QSettings &settings, QWidget *parent = 0);
-    ~AlgebraWindow();
+    explicit AlgebraWidget(QWidget *parent = 0);
+    ~AlgebraWidget();
 
 public slots:
     void weHaveAnswer();
@@ -24,7 +24,7 @@ public slots:
     void settingsChangedSub( bool newState );
 
 private:
-    Ui::AlgebraWindow *ui;
+    Ui::AlgebraWidget *ui;
     int a, b, answer;
     enum Exercises : unsigned {
         Additions = 1,
@@ -33,7 +33,7 @@ private:
     unsigned exercises;
     unsigned numExerciseTypes;
 
-    QSettings &settings;
+    QSettings settings;
 
     void newExercise();
     bool checkAnswer();
@@ -43,4 +43,4 @@ private:
     Exercises chooseOp() const;
 };
 
-#endif // ALGEBRAWINDOW_H
+#endif // ALGEBRAWIDGET_H

@@ -25,10 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        AlgebraWindow.cpp
+    MainWindow.cpp \
+    AlgebraWidget.cpp \
+    DictationWidget.cpp \
+    DictationConfiguration.cpp
 
 HEADERS += \
-        AlgebraWindow.h
+    MainWindow.h \
+    AlgebraWidget.h \
+    DictationWidget.h \
+    DictationConfiguration.h
 
 FORMS += \
-        AlgebraWindow.ui
+    MainWindow.ui \
+    AlgebraWidget.ui \
+    DictationWidget.ui \
+    DictationConfiguration.ui
