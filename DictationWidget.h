@@ -19,6 +19,7 @@ public:
 public slots:
     void newAnswer();
     void idk();
+    void wordsLocationDlg();
 
 private:
     Ui::DictationWidget *ui;

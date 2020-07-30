@@ -1,7 +1,10 @@
 #include "DictationWidget.h"
 #include "ui_DictationWidget.h"
 
+#include <QDir>
 #include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
 #include <QTextStream>
 
 #include <assert.h>
@@ -24,6 +27,9 @@ DictationWidget::~DictationWidget()
 }
 
 void DictationWidget::newAnswer() {
+    if( words.size()==0 )
+        return;
+
     ui->lastAnswer->setText("");
     ui->lastQuestion->setText("");
 
@@ -47,6 +53,22 @@ void DictationWidget::idk() {
     newQuestion();
 }
 
+void DictationWidget::wordsLocationDlg() {
+    settings.beginGroup("Dictation");
+    auto wordsPath = settings.value("wordsPath").toString();
+    settings.endGroup();
+
+    wordsPath = QFileDialog::getOpenFileName( this, "Select dictation words file", wordsPath, "CSV Files (*.csv)" );
+
+    if( wordsPath.size()>0 ) {
+        settings.setValue("Dictation/wordsPath", wordsPath);
+        readWords();
+        newQuestion();
+
+        ui->answer->setFocus();
+    }
+}
+
 DictationWidget::WordPair::WordPair( QStringList list ) {
     assert( list.size()==2 );
     word = std::move( list[0] );
@@ -54,7 +76,9 @@ DictationWidget::WordPair::WordPair( QStringList list ) {
 }
 
 void DictationWidget::newQuestion() {
-    assert( words.size()>0 );
+    if( words.size()==0 )
+        return;
+
     currentQuestion = std::rand() % words.size();
 
     ui->question->setText( words[currentQuestion].translation );
@@ -77,6 +101,11 @@ void DictationWidget::readWords() {
     settings.beginGroup("Dictation");
     auto wordsPath = settings.value("wordsPath").toString();
     settings.endGroup();
+
+    if( wordsPath.size()==0 ) {
+        wordsLocationDlg();
+        return;
+    }
 
     QFile wordsFile( wordsPath );
     if( !wordsFile.open(QIODevice::ReadOnly | QIODevice::Text) ) {
