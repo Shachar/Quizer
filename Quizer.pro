@@ -27,17 +27,14 @@ SOURCES += \
         main.cpp \
     MainWindow.cpp \
     AlgebraWidget.cpp \
-    DictationWidget.cpp \
-    DictationConfiguration.cpp
+    DictationWidget.cpp
 
 HEADERS += \
     MainWindow.h \
     AlgebraWidget.h \
-    DictationWidget.h \
-    DictationConfiguration.h
+    DictationWidget.h
 
 FORMS += \
     MainWindow.ui \
     AlgebraWidget.ui \
-    DictationWidget.ui \
-    DictationConfiguration.ui
+    DictationWidget.ui
