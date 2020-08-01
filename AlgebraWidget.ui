@@ -35,6 +35,20 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QCheckBox" name="settingsMultiplication">
+         <property name="text">
+          <string>×</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="settingsDivision">
+         <property name="text">
+          <string>÷</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -206,10 +220,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>settingsMultiplication</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>AlgebraWidget</receiver>
+   <slot>settingsChangedMult(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>329</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>settingsDivision</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>AlgebraWidget</receiver>
+   <slot>settingsChangedDiv(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>346</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>weHaveAnswer()</slot>
   <slot>settingsChangedAdd(bool)</slot>
   <slot>settingsChangedSub(bool)</slot>
+  <slot>settingsChangedMult(bool)</slot>
+  <slot>settingsChangedDiv(bool)</slot>
  </slots>
 </ui>

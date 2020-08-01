@@ -22,6 +22,8 @@ public slots:
 
     void settingsChangedAdd( bool newState );
     void settingsChangedSub( bool newState );
+    void settingsChangedMult( bool newState );
+    void settingsChangedDiv( bool newState );
 
 private:
     Ui::AlgebraWidget *ui;
@@ -29,6 +31,8 @@ private:
     enum Exercises : unsigned {
         Additions = 1,
         Subtractions = 2,
+        Multiplications = 4,
+        Division = 8,
     };
     unsigned exercises;
     unsigned numExerciseTypes;

@@ -47,6 +47,15 @@ void AlgebraWidget::newExercise() {
         ui->operation->setText("-");
         std::swap( a, answer );
         break;
+    case Multiplications:
+        answer = a*b;
+        ui->operation->setText("×");
+        break;
+    case Division:
+        answer = a*b;
+        ui->operation->setText("÷");
+        std::swap( a, answer );
+        break;
     }
 
     char buffer[50];
@@ -98,6 +107,26 @@ void AlgebraWidget::settingsChangedSub( bool newState ) {
         exercises |= Subtractions;
     } else {
         exercises &= ~Subtractions;
+    }
+
+    refreshMenu();
+}
+
+void AlgebraWidget::settingsChangedMult( bool newState ) {
+    if( newState ) {
+        exercises |= Multiplications;
+    } else {
+        exercises &= ~Multiplications;
+    }
+
+    refreshMenu();
+}
+
+void AlgebraWidget::settingsChangedDiv( bool newState ) {
+    if( newState ) {
+        exercises |= Division;
+    } else {
+        exercises &= ~Division;
     }
 
     refreshMenu();
