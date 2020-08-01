@@ -138,6 +138,8 @@ void AlgebraWidget::refreshMenu() {
 
     ui->settingsAddition->setChecked( exercises&Additions );
     ui->settingsSubtraction->setChecked( exercises&Subtractions );
+    ui->settingsMultiplication->setChecked( exercises&Multiplications );
+    ui->settingsDivision->setChecked( exercises&Division );
 
     settings.setValue( "Algebra/exercises", exercises );
 

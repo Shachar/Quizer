@@ -141,6 +141,26 @@
         </spacer>
        </item>
        <item>
+        <widget class="QPushButton" name="skip">
+         <property name="text">
+          <string>Skip</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="done">
          <property name="text">
           <string>Done</string>
@@ -252,6 +272,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>skip</sender>
+   <signal>clicked()</signal>
+   <receiver>AlgebraWidget</receiver>
+   <slot>newExercise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>272</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>weHaveAnswer()</slot>
@@ -259,5 +295,6 @@
   <slot>settingsChangedSub(bool)</slot>
   <slot>settingsChangedMult(bool)</slot>
   <slot>settingsChangedDiv(bool)</slot>
+  <slot>newExercise()</slot>
  </slots>
 </ui>

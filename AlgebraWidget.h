@@ -19,6 +19,7 @@ public:
 public slots:
     void weHaveAnswer();
     void resetAnswerState();
+    void newExercise();
 
     void settingsChangedAdd( bool newState );
     void settingsChangedSub( bool newState );
@@ -39,7 +40,6 @@ private:
 
     QSettings settings;
 
-    void newExercise();
     bool checkAnswer();
 
     void refreshMenu();
