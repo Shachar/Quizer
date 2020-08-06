@@ -52,6 +52,8 @@ void AlgebraWidget::newExercise() {
         ui->operation->setText("×");
         break;
     case Division:
+        b = std::rand() % 10;
+        b++;
         answer = a*b;
         ui->operation->setText("÷");
         std::swap( a, answer );
