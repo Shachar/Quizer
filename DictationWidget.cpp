@@ -27,22 +27,9 @@ DictationWidget::~DictationWidget()
 }
 
 void DictationWidget::newAnswer() {
-    if( words.size()==0 )
-        return;
-
-    ui->lastAnswer->setText("");
-    ui->lastQuestion->setText("");
-
-    if( ui->answer->text()==words[currentQuestion].word ) {
+    if( verifyAnswer() ) {
         // Correct answer
         newQuestion();
-    } else {
-        // Incorrect answer
-        QPalette *palette = new QPalette();
-        palette->setColor(QPalette::Base,Qt::red);
-        ui->answer->setPalette(*palette);
-
-        ui->answer->selectAll();
     }
 }
 
@@ -70,15 +57,38 @@ void DictationWidget::wordsLocationDlg() {
 }
 
 void DictationWidget::dontAsk() {
-    words.erase( words.begin()+currentQuestion );
+    if( verifyAnswer() ) {
+        words.erase( words.begin()+currentQuestion );
 
-    newQuestion();
+        newQuestion();
+    }
 }
 
 DictationWidget::WordPair::WordPair( QStringList list ) {
     assert( list.size()==2 );
     word = std::move( list[0] );
     translation = std::move( list[1] );
+}
+
+bool DictationWidget::verifyAnswer() {
+    if( words.size()==0 )
+        return false;
+
+    ui->lastAnswer->setText("");
+    ui->lastQuestion->setText("");
+
+    if( ui->answer->text()==words[currentQuestion].word ) {
+        return true;
+    }
+
+    // Incorrect answer
+    QPalette *palette = new QPalette();
+    palette->setColor(QPalette::Base,Qt::red);
+    ui->answer->setPalette(*palette);
+
+    ui->answer->selectAll();
+
+    return false;
 }
 
 void DictationWidget::newQuestion() {

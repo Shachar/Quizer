@@ -34,6 +34,7 @@ private:
     std::vector< WordPair > words;
     unsigned currentQuestion;
 
+    bool verifyAnswer();
     void newQuestion();
     void resetAnswerState();
     void readWords();
